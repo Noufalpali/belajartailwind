@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JJK New World 2.0</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Syncopate:wght@400;700&family=Barlow+Condensed:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            void:    '#080010',
+            abyss:   '#0D0020',
+            deep:    '#130030',
+            violet:  '#7B2BFF',
+            glow:    '#A855F7',
+            neon:    '#C084FC',
+            plasma:  '#E879F9',
+            frost:   '#F3E8FF',
+          },
+          fontFamily: {
+            syncopate: ['Syncopate', 'sans-serif'],
+            chakra:    ['Chakra Petch', 'monospace'],
+            barlow:    ['Barlow Condensed', 'sans-serif'],
+            rajdhani:  ['Rajdhani', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-void font-rajdhani text-frost overflow-x-hidden">
+
+  <!-- CANVAS HEX BACKGROUND -->
+  <canvas id="hex-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-40"></canvas>
+
+  <!-- CURSOR -->
+  <div id="cursor" class="fixed z-50 pointer-events-none w-5 h-5 rounded-full border border-violet opacity-0 transition-opacity duration-300" style="transform:translate(-50%,-50%)"></div>
+  <div id="cursor-dot" class="fixed z-50 pointer-events-none w-1.5 h-1.5 rounded-full bg-plasma opacity-0" style="transform:translate(-50%,-50%)"></div>
+
+  <!-- ═══════ NAVBAR ═══════ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <!-- Logo image placeholder -->
+        <div class="logo-frame w-10 h-10 relative flex items-center justify-center overflow-hidden"
+             title="Ganti dengan logo tim Anda">
+          <img id="team-logo-img"
+               src="assets/logo/logonobg.png"
+               alt="Team Logo"
+               class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"/>
+          <div class="logo-frame-glow absolute inset-0 rounded"></div>
+        </div>
+        <div>
+          <div class="font-syncopate font-bold text-base tracking-widest text-white leading-none">JJK NEW WORLD 2.0</div>
+          <div class="font-barlow text-plasma text-xs tracking-[0.4em] uppercase leading-none mt-0.5">Esport ID</div>
+        </div>
+      </a>
+
+      <!-- Nav Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#about"        class="nav-link font-barlow text-xs tracking-[0.25em] uppercase text-white/40 hover:text-neon">About</a>
+        <a href="#members"      class="nav-link font-barlow text-xs tracking-[0.25em] uppercase text-white/40 hover:text-neon">Members</a>
+        <a href="#achievements" class="nav-link font-barlow text-xs tracking-[0.25em] uppercase text-white/40 hover:text-neon">Achievements</a>
+        <a href="#contact"      class="nav-link font-barlow text-xs tracking-[0.25em] uppercase text-white/40 hover:text-neon">Contact</a>
+      </div>
+
+      <!-- CTA -->
+      <a href="#contact" class="btn-void hidden md:flex items-center gap-2 font-barlow text-xs font-bold tracking-[0.25em] uppercase px-5 py-2.5">
+        <span class="btn-void-icon">⬡</span> Join Us
+      </a>
+
+      <!-- Hamburger -->
+      <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-1.5">
+        <span class="h-bar block w-6 h-px bg-neon transition-all duration-300 origin-center"></span>
+        <span class="h-bar block w-4 h-px bg-violet transition-all duration-300 ml-auto"></span>
+        <span class="h-bar block w-6 h-px bg-neon transition-all duration-300 origin-center"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden max-h-0 overflow-hidden transition-all duration-500 border-t border-violet/10 bg-abyss/95 backdrop-blur-xl">
+      <div class="flex flex-col gap-5 px-6 py-6">
+        <a href="#about"        class="font-barlow text-sm tracking-[0.25em] uppercase text-white/50 hover:text-neon transition-colors">About</a>
+        <a href="#members"      class="font-barlow text-sm tracking-[0.25em] uppercase text-white/50 hover:text-neon transition-colors">Members</a>
+        <a href="#achievements" class="font-barlow text-sm tracking-[0.25em] uppercase text-white/50 hover:text-neon transition-colors">Achievements</a>
+        <a href="#contact"      class="font-barlow text-sm tracking-[0.25em] uppercase text-white/50 hover:text-neon transition-colors">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════ HERO ═══════ -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Radial glow bg -->
+    <div class="hero-glow-1 absolute inset-0 pointer-events-none"></div>
+    <div class="hero-glow-2 absolute inset-0 pointer-events-none"></div>
+
+    <!-- Decorative diagonal lines -->
+    <div class="deco-lines absolute inset-0 pointer-events-none overflow-hidden">
+      <div class="deco-line deco-line-1"></div>
+      <div class="deco-line deco-line-2"></div>
+      <div class="deco-line deco-line-3"></div>
+    </div>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+
+      <!-- Top eyebrow -->
+      <div class="flex items-center justify-center gap-4 mb-8 animate-fade-in">
+        <div class="eyebrow-line"></div>
+        <span class="font-barlow text-plasma text-xs tracking-[0.5em] uppercase">Indonesian Esport Organisation</span>
+        <div class="eyebrow-line"></div>
+      </div>
+
+      <!-- Team logo big -->
+      <div class="hero-logo-wrap mx-auto mb-8 animate-slide-up" style="animation-delay:0.05s">
+        <div class="hero-logo-ring">
+          <img id="hero-logo-img"
+               src="assets/logo/logonobg.png"
+               alt="JJK Logo"
+               class="w-full h-full object-contain p-3"/>
+        </div>
+      </div>
+
+      <!-- Main title -->
+      <h1 class="animate-slide-up" style="animation-delay:0.1s">
+        <span class="font-syncopate font-bold block text-white leading-none" style="font-size: clamp(3.5rem,11vw,8.5rem); letter-spacing:-0.02em;">
+          JJK New World 2.0
+        </span>
+        <span class="font-syncopate font-bold block leading-none text-gradient-purple" style="font-size: clamp(2rem,6vw,5rem); letter-spacing:0.15em; margin-top:0.1em;">
+          ESPORT ID
+        </span>
+      </h1>
+
+      <!-- Tagline -->
+      <p class="font-chakra text-white/50 text-base md:text-xl tracking-wider mt-6 mb-10 animate-slide-up" style="animation-delay:0.25s">
+        "Play Beyond Limits — Dominate the Digital Arena"
+      </p>
+
+      <!-- Quick stats bar -->
+      <div class="hero-stats-bar inline-flex items-center gap-0 rounded-full overflow-hidden animate-slide-up" style="animation-delay:0.35s">
+        <div class="stat-pill">
+          <span class="font-chakra font-bold text-neon text-lg leading-none">2019</span>
+          <span class="font-barlow text-white/40 text-xs tracking-widest uppercase">Founded</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-pill">
+          <span class="font-chakra font-bold text-neon text-lg leading-none">47</span>
+          <span class="font-barlow text-white/40 text-xs tracking-widest uppercase">Trophies</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-pill">
+          <span class="font-chakra font-bold text-neon text-lg leading-none">12</span>
+          <span class="font-barlow text-white/40 text-xs tracking-widest uppercase">Players</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-pill">
+          <span class="font-chakra font-bold text-neon text-lg leading-none">5</span>
+          <span class="font-barlow text-white/40 text-xs tracking-widest uppercase">Titles</span>
+        </div>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="scroll-hint mt-16 flex flex-col items-center gap-2 animate-fade-in" style="animation-delay:0.6s">
+        <div class="scroll-track"></div>
+        <div class="scroll-ball"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ ABOUT ═══════ -->
+  <section id="about" class="relative py-36 z-10">
+    <div class="section-slash-top"></div>
+
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+        <!-- Left: visual panel -->
+        <div class="about-visual-wrap reveal">
+          <!-- Logo upload zone -->
+          <div class="about-logo-panel">
+            <div class="alp-corner alp-tl"></div>
+            <div class="alp-corner alp-tr"></div>
+            <div class="alp-corner alp-bl"></div>
+            <div class="alp-corner alp-br"></div>
+            <div class="alp-inner">
+              <div class="alp-logo-zone" id="about-logo-zone" title="Klik untuk upload logo tim">
+                <img id="about-logo-img"
+                     src="assets/logo/logonobg.png"
+                     alt="Team Logo"
+                     class="w-full h-full object-contain p-8"/>
+                <div class="alp-upload-hint">
+                  <span class="font-barlow text-xs tracking-widest uppercase text-violet/60">Klik untuk upload logo</span>
+                </div>
+                <input type="file" id="logo-upload" accept="image/*" class="hidden"/>
+              </div>
+            </div>
+            <!-- Floating badge -->
+            <div class="alp-badge">
+              <span class="font-chakra text-xs text-plasma font-bold tracking-widest">EST. 2019</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: text -->
+        <div class="reveal" style="transition-delay:0.1s">
+          <div class="section-eyebrow mb-4">About The Team</div>
+          <h2 class="font-syncopate font-bold text-white text-3xl md:text-4xl leading-tight mb-6">
+            We are more than<br/>
+            <span class="text-gradient-purple">just a team.</span><br/>
+            We are family.
+          </h2>
+          <p class="font-rajdhani text-white/50 text-lg leading-relaxed mb-6">
+            JJK Esport ID lahir dari passion tanpa batas terhadap dunia kompetitif gaming. Didirikan tahun 2023 di Pangkalpinang, kami membangun ekosistem pemain elite yang berfokus pada kerja sama, strategi tingkat tinggi, dan kekeluargaan yang absolut.
+          </p>
+          <p class="font-rajdhani text-white/50 text-lg leading-relaxed mb-10">
+            Dengan roster lintas divisi — Valorant, Mobile Legends, PUBG Mobile, dan Free Fire — JJK Esport ID telah mengembangkan diri sebagai cahaya baru dari dunia esport indonesia.
+          </p>
+
+          <!-- About pillars -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="about-pillar">
+              <div class="ap-icon">⚡</div>
+              <div class="font-chakra text-white text-sm font-semibold mb-1">Teamwork Playstyle</div>
+              <div class="font-rajdhani text-white/40 text-sm">Selalu menekan lawan dengan kerjasama tinggi</div>
+            </div>
+            <div class="about-pillar">
+              <div class="ap-icon">🧠</div>
+              <div class="font-chakra text-white text-sm font-semibold mb-1">Strategic Depth</div>
+              <div class="font-rajdhani text-white/40 text-sm">Analisis mendalam tiap laga dan musuh</div>
+            </div>
+            <div class="about-pillar">
+              <div class="ap-icon">🌐</div>
+              <div class="font-chakra text-white text-sm font-semibold mb-1">New Era of Champion</div>
+              <div class="font-rajdhani text-white/40 text-sm">Pencetus era baru dalam dunia esport</div>
+            </div>
+            <div class="about-pillar">
+              <div class="ap-icon">🏆</div>
+              <div class="font-chakra text-white text-sm font-semibold mb-1">Potential Team</div>
+              <div class="font-rajdhani text-white/40 text-sm">Berpotensi menjadi team terbaik</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-slash-bottom"></div>
+  </section>
+
+  <!-- ═══════ MEMBERS ═══════ -->
+  <section id="members" class="relative py-36 z-10">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="text-center mb-20 reveal">
+        <div class="section-eyebrow mb-4">Player Roster</div>
+        <h2 class="font-syncopate font-bold text-white text-3xl md:text-4xl mb-4">
+          Meet the <span class="text-gradient-purple">Warriors</span>
+        </h2>
+        <p class="font-rajdhani text-white/40 text-lg max-w-xl mx-auto">
+          Setiap pemain adalah kunci. Bersama, mereka adalah petarung tak tertandingi.
+        </p>
+      </div>
+
+      <!-- Division filter -->
+      <div class="flex items-center justify-center gap-3 mb-14 flex-wrap reveal">
+        <button class="div-filter" data-div="mlbb">Mobile Legends</button>
+      </div>
+
+      <!-- Players grid -->
+      <div id="players-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ ACHIEVEMENTS ═══════ -->
+  <section id="achievements" class="relative py-36 z-10 overflow-hidden">
+    <div class="section-slash-top"></div>
+
+    <!-- BG decoration -->
+    <div class="achiev-bg-deco"></div>
+
+    <div class="max-w-5xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-20 reveal">
+        <div class="section-eyebrow mb-4">Hall of Glory</div>
+        <h2 class="font-syncopate font-bold text-white text-3xl md:text-4xl mb-4">
+          Championship <span class="text-gradient-purple">History</span>
+        </h2>
+        <p class="font-rajdhani text-white/40 text-lg">
+          Jejak kemenangan yang membuktikan siapa JJK Esport ID.
+        </p>
+      </div>
+
+      <!-- Year filter tabs -->
+      <div class="flex items-center justify-center gap-2 mb-14 flex-wrap reveal">
+        <button class="year-filter active" data-year="all">Semua</button>
+        <button class="year-filter" data-year="2026">2026</button>
+        <button class="year-filter" data-year="2025">2025</button>
+        <button class="year-filter" data-year="2024">2024</button>
+        <button class="year-filter" data-year="2023">2023</button>
+      </div>
+
+      <!-- Timeline -->
+      <div id="timeline" class="relative">
+        <!-- Vertical line -->
+        <div class="timeline-spine"></div>
+        <!-- Items injected by JS -->
+      </div>
+    </div>
+
+    <div class="section-slash-bottom"></div>
+  </section>
+
+  <!-- ═══════ CONTACT ═══════ -->
+  <section id="contact" class="relative py-36 z-10">
+    <div class="max-w-6xl mx-auto px-6">
+
+      <div class="text-center mb-16 reveal">
+        <div class="section-eyebrow mb-4">Get in Touch</div>
+        <h2 class="font-syncopate font-bold text-white text-3xl md:text-4xl mb-4">
+          Contact <span class="text-gradient-purple">Person</span>
+        </h2>
+        <p class="font-rajdhani text-white/40 text-lg">
+          Ada pertanyaan, kerja sama, atau ingin bergabung? Hubungi kami.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8 mb-12">
+
+        <!-- Contact card — Manager -->
+        <div class="contact-card reveal">
+          <div class="cc-accent"></div>
+          <div class="cc-role">Team Manager</div>
+          <div class="cc-avatar-wrap">
+            <div class="cc-avatar">
+              <img src="assets/foto/peterparker.png"
+                   alt="Manager" class="w-full h-full object-cover"/>
+            </div>
+          </div>
+          <div class="cc-name font-syncopate font-bold text-white text-lg mt-3">Andrew Parker</div>
+          <div class="cc-title font-barlow text-neon text-sm tracking-widest uppercase mb-4">Team Manager & CEO</div>
+          <div class="cc-contacts">
+            <a href="https://wa.me/6281271026897" class="cc-contact-item" target="_blank">
+              <span class="cc-contact-icon">📱</span>
+              <span>+62 812-7102-6897</span>
+            </a>
+            <a href="mailto:manager@jjkid.gg" class="cc-contact-item">
+              <span class="cc-contact-icon">✉️</span>
+              <span>manager@jjkid.gg</span>
+            </a>
+            <a href="https://instagram.com/jjkid" class="cc-contact-item" target="_blank">
+              <span class="cc-contact-icon">📸</span>
+              <span>@jjkid.official</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Contact card — Media/Partnership -->
+        <div class="contact-card reveal" style="transition-delay:0.12s">
+          <div class="cc-accent cc-accent-plasma"></div>
+          <div class="cc-role">Media & Partnership</div>
+          <div class="cc-avatar-wrap">
+            <div class="cc-avatar">
+              <img src="assets/foto/mlb.png"
+                   alt="Media" class="w-full h-full object-cover"/>
+            </div>
+          </div>
+          <div class="cc-name font-syncopate font-bold text-white text-lg mt-3">MLB</div>
+          <div class="cc-title font-barlow text-plasma text-sm tracking-widest uppercase mb-4">Media & Brand Partnership</div>
+          <div class="cc-contacts">
+            <a href="https://wa.me/6289876543210" class="cc-contact-item" target="_blank">
+              <span class="cc-contact-icon">📱</span>
+              <span>+62 898-7654-3210</span>
+            </a>
+            <a href="mailto:media@jjkid.gg" class="cc-contact-item">
+              <span class="cc-contact-icon">✉️</span>
+              <span>media@jjkid.gg</span>
+            </a>
+            <a href="https://twitter.com/jjkid" class="cc-contact-item" target="_blank">
+              <span class="cc-contact-icon">𝕏</span>
+              <span>@jjkid.official</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Socials + address bar -->
+      <div class="contact-bottom-bar reveal" style="transition-delay:0.2s">
+        <div class="cbb-address">
+          <span class="cbb-icon">📍</span>
+          <span class="font-rajdhani text-white/50">Kace Pegunungan, Kota Pangkalpinang, Bangka Belitung — Indonesia</span>
+        </div>
+        <div class="cbb-socials">
+          <span class="font-barlow text-white/30 text-xs tracking-widest uppercase mr-4 hidden md:inline">Follow Us</span>
+          <a href="#" class="social-btn" aria-label="YouTube">▶</a>
+          <a href="#" class="social-btn" aria-label="TikTok">♪</a>
+          <a href="#" class="social-btn" aria-label="Instagram">◈</a>
+          <a href="#" class="social-btn" aria-label="Discord">◎</a>
+          <a href="#" class="social-btn" aria-label="Twitter">𝕏</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════ FOOTER ═══════ -->
+  <footer class="relative z-10 border-t border-violet/10 py-10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="font-syncopate font-bold text-sm text-white tracking-widest">JJK New World 2.0</span>
+        <span class="text-violet/30">|</span>
+        <span class="font-barlow text-white/30 text-xs tracking-widest uppercase">Esport ID</span>
+      </div>
+      <div class="font-barlow text-white/20 text-xs tracking-widest uppercase text-center">
+        © 2026 JJK Esport Indonesia. All Rights Reserved.
+      </div>
+      <div class="font-barlow text-white/20 text-xs tracking-widest uppercase">
+        Built for Champions ⚡
+      </div>
+    </div>
+  </footer>
+
+  <script src="effects.js"  type="module"></script>
+  <script src="main.js"     type="module"></script>
+</body>
+</html>
