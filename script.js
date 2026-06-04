@@ -1,17 +1,8 @@
-// ================================================
-//  script.js — Anomali 2.0 Esport (JS ES6)
-// ================================================
-
-// 1. NAVBAR SCROLL EFFECT
-// Tambahkan class .scrolled agar navbar blur saat di-scroll
 const navbar = document.querySelector('#navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
 });
 
-
-// 2. HAMBURGER MENU (Mobile)
-// Toggle menu mobile dan animasi icon hamburger jadi X
 const hamburger  = document.querySelector('#hamburger');
 const mobileMenu = document.querySelector('#mobile-menu');
 
@@ -20,7 +11,6 @@ hamburger.addEventListener('click', () => {
   mobileMenu.classList.toggle('hidden');
 });
 
-// Tutup menu saat link diklik
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     hamburger.classList.remove('open');
@@ -28,9 +18,6 @@ mobileMenu.querySelectorAll('a').forEach(link => {
   });
 });
 
-
-// 3. FADE-IN ON SCROLL (Intersection Observer)
-// Elemen .fade-in muncul dari bawah saat masuk viewport
 const fadeObserver = new IntersectionObserver((entries) => {
   entries.forEach(({ target, isIntersecting }) => {
     if (isIntersecting) {
@@ -43,8 +30,6 @@ const fadeObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
 
-// 4. COUNTER ANIMATION (ES6 Arrow Function)
-// Angka naik dari 0 ke target saat hero terlihat
 const animateCounter = (el) => {
   const target = parseInt(el.dataset.target, 10);
   const duration = 1500; // ms
@@ -71,9 +56,6 @@ const counterObserver = new IntersectionObserver((entries) => {
 const heroSection = document.querySelector('#home');
 if (heroSection) counterObserver.observe(heroSection);
 
-
-// 5. ACTIVE NAV LINK ON SCROLL
-// Highlight link navbar sesuai section aktif
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');
 
@@ -92,9 +74,6 @@ const activeLinkObserver = new IntersectionObserver((entries) => {
 
 sections.forEach(s => activeLinkObserver.observe(s));
 
-
-// 6. CONTACT FORM VALIDATION
-// Validasi input dan feedback setelah submit
 const form     = document.querySelector('#contact-form');
 const feedback = document.querySelector('#form-feedback');
 
@@ -107,12 +86,10 @@ const showFeedback = (msg, isError = false) => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  // Destructure nilai input (ES6)
   const { value: name }    = document.querySelector('#input-name');
   const { value: email }   = document.querySelector('#input-email');
   const { value: message } = document.querySelector('#input-message');
 
-  // Validasi
   if (!name.trim() || !email.trim() || !message.trim()) {
     showFeedback('[ ERROR ] Semua field harus diisi!', true);
     return;
@@ -122,7 +99,6 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
-  // Simulasi sukses
   showFeedback(`[ OK ] Pesan dari ${name.trim()} berhasil dikirim!`);
   form.reset();
 });
