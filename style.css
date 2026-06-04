@@ -11,7 +11,6 @@ body { font-family: var(--font-body); }
 .font-display { font-family: var(--font-display); }
 .font-body    { font-family: var(--font-body); }
 
-/* Navbar scroll effect */
 #navbar.scrolled {
   background: rgba(6, 6, 16, 0.9);
   backdrop-filter: blur(20px);
@@ -20,12 +19,10 @@ body { font-family: var(--font-body); }
   box-shadow: 0 0 40px rgba(0, 245, 255, 0.05);
 }
 
-/* Clip-path button */
 .clip-btn {
   clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
 }
 
-/* Grid background */
 .grid-bg {
   background-image:
     linear-gradient(rgba(0,245,255,0.04) 1px, transparent 1px),
@@ -34,12 +31,10 @@ body { font-family: var(--font-body); }
   mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 40%, transparent 100%);
 }
 
-/* Scanline overlay */
 .scanline {
   background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,245,255,0.015) 2px, rgba(0,245,255,0.015) 4px);
 }
 
-/* Glitch text */
 .glitch-text { position: relative; color: white; font-family: var(--font-display); }
 .glitch-text::before, .glitch-text::after {
   content: attr(data-text);
@@ -72,7 +67,6 @@ body { font-family: var(--font-body); }
   95% { transform: translate(2px, 0); }
 }
 
-/* Text stroke */
 .text-stroke {
   font-family: var(--font-display); font-weight: 900;
   -webkit-text-stroke: 2px var(--cyan); color: transparent;
@@ -82,39 +76,32 @@ body { font-family: var(--font-body); }
   -webkit-text-stroke: 2px var(--cyan); color: transparent;
 }
 
-/* Blink dot */
 @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
 .blink { animation: blink 1.2s infinite; }
 
-/* Corner decorations (cyan) */
 .corner { position: absolute; width: 10px; height: 10px; border-color: var(--cyan); border-style: solid; }
 .corner.tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
 .corner.tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
 .corner.bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
 .corner.br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
 
-/* Corner decorations (purple) */
 .corner-purple { position: absolute; width: 10px; height: 10px; border-color: var(--purple); border-style: solid; }
 .corner-purple.tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
 .corner-purple.tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
 .corner-purple.bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
 .corner-purple.br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
 
-/* Fade-in animation (Intersection Observer) */
 .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-/* Member card hover */
 .member-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .member-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,245,255,0.08); }
 .avatar { box-shadow: 0 0 20px rgba(0,245,255,0.15); }
 
-/* Hamburger X animation */
 #hamburger.open .ham-bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 #hamburger.open .ham-bar:nth-child(2) { opacity: 0; }
 #hamburger.open .ham-bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg2); }
 ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 4px; }
