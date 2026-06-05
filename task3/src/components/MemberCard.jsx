@@ -1,24 +1,5 @@
-// ============================================================
-// COMPONENT 2: MemberCard
-// Menampilkan kartu profil satu anggota tim.
-//
-// Cara pakai:
-//   <MemberCard
-//     inisial="MK"
-//     nama="MAUL KORVO"
-//     peran="Captain · ML"
-//     kda="4.2"
-//     winrate="71"
-//   />
-// ============================================================
-
-// Kita pakai StatBadge di dalam kartu ini
 import StatBadge from "./StatBadge"
-
 export default function MemberCard({ inisial, nama, peran, kda, winrate }) {
-  //                                  ^^^^^^   ^^^^   ^^^^^  ^^^  ^^^^^^^
-  //                              Props yang diterima dari App.jsx
-
   return (
     <div className="border border-white/10 bg-white/5 p-6 rounded-xl hover:border-[#00f5ff] transition-all duration-300">
 

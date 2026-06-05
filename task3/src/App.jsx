@@ -1,14 +1,6 @@
-// ============================================================
-// App.jsx — Halaman utama
-// Di sini data member disimpan dan MemberCard dipanggil.
-// ============================================================
-
 import MemberCard from "./components/MemberCard"
 
 export default function App() {
-
-  // Data semua member — edit di sini untuk ubah isi kartu
-  // Untuk tambah member: copy satu baris, paste, ganti isinya
   const members = [
     { inisial: "MK", nama: "MAUL KORVO",    peran: "Captain · ML",      kda: "4.2", winrate: "71" },
     { inisial: "FH", nama: "FARHAN MARTIS", peran: "Carry · ML",        kda: "5.8", winrate: "68" },
