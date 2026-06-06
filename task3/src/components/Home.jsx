@@ -53,7 +53,7 @@ export default function Home() {
 
         {/* Deskripsi */}
         <p className="text-gray-400 text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto">
-          Kami bukan sekadar tim. Kami adalah <span className="text-white font-semibold">anomali</span> di dunia esport — bermain dengan strategi, menang dengan kekeluargaan.
+          Kami bukan sekadar tim. Kami adalah <span className="text-white font-semibold">anomali</span> di dunia esport — bermain dengan strategi, menang dengan kekonyolan.
         </p>
 
         {/* Tombol */}
@@ -73,16 +73,16 @@ export default function Home() {
         {/* Stats */}
         <div className="mt-20 grid grid-cols-3 gap-px bg-[#ffffff08] border border-[#ffffff08]">
           <div className="bg-[#060610] py-6 px-4 text-center">
-            <Counter target={5} color="text-[#00f5ff]" />
+            <Counter target={2021} color="text-[#00f5ff]" />
             <div className="text-xs text-gray-500 tracking-widest uppercase mt-1">Tahun Berdiri</div>
           </div>
           <div className="bg-[#060610] py-6 px-4 text-center border-x border-[#ffffff08]">
-            <Counter target={12} color="text-[#7b2fff]" />
+            <Counter target={7} color="text-[#7b2fff]" />
             <div className="text-xs text-gray-500 tracking-widest uppercase mt-1">Member Aktif</div>
           </div>
           <div className="bg-[#060610] py-6 px-4 text-center">
             <Counter target={47} color="text-[#00f5ff]" />
-            <div className="text-xs text-gray-500 tracking-widest uppercase mt-1">Tournament Win</div>
+            <div className="text-xs text-gray-500 tracking-widest uppercase mt-1">Games Win</div>
           </div>
         </div>
 
